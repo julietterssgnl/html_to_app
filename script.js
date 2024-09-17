@@ -53,61 +53,20 @@ caption.addEventListener("mouseout", () => {
     caption.style.color = "black";
 });
 
-/**
- * Fonction pour secouer un élément grâce à la classe shake définie dans le fichier style.css
- * @param {*} element 
- */
-const shake = (element) => {
-    // only shake if the element is not already shaking
-    if (!element.classList.contains("shake")) {
-        console.log("Shake the element", element);
+
+
+const shake2 =(id) => {
+    // récupère l'élément par son id
+    const element = document.getElementById(id);
+    if (element.classList.contains("shake")){
+        element.classList.remove("shake");
+    } else {
         element.classList.add("shake");
     }
 }
 
-/**
- * Fonction pour arrêter de secouer un élément en supprimant la classe shake
- * @param {*} element 
- */
-const unshake = (element) => {
-    // only unshake if the element is shaking
-    if (element.classList.contains("shake")) {
-        console.log("Unshake the element", element);
-        element.classList.remove("shake");
-    }
-}
 
-// Ajouter un bouton et gérer l'évenement "Click" pour secouer l'image en utilisant la fonction shake
-const buttonShakeImage = document.createElement("button");
-buttonShakeImage.innerText = "Shake the image";
-document.querySelector("img").after(buttonShakeImage);
-buttonShakeImage.addEventListener("click", () => {
-    shake(document.querySelector("img"));
-});
 
-// Ajouter un bouton et de gérer l'évenement "Click" pour arrêter de secouer l'image en utilisant la fonction unshake
-const buttonUnShakeImage = document.createElement("button");
-buttonUnShakeImage.innerText = "Stop shaking the image";
-buttonShakeImage.after(buttonUnShakeImage);
-buttonUnShakeImage.addEventListener("click", () => {
-    unshake(document.querySelector("img"));
-});
-
-// Ajouter un bouton et gérer l'évenement "Click" pour secouer le tableau en utilisant la fonction shake
-const buttonShakeTable = document.createElement("button");
-buttonShakeTable.innerText = "Shake the table";
-document.querySelector("table").after(buttonShakeTable);
-buttonShakeTable.addEventListener("click", () => {
-    shake(document.querySelector("table"));
-});
-
-// Ajouter un bouton et gérer l'évenement "Click" pour arrêter de secouer le tableau en utilisant la fonction unshake
-const buttonUnshakeTable = document.createElement("button");
-buttonUnshakeTable.innerText = "Stop shaking the table";
-buttonShakeTable.after(buttonUnshakeTable);
-buttonUnshakeTable.addEventListener("click", () => {
-    unshake(document.querySelector("table"));
-});
 
 // Nettoyer le contenu du tableau avant de le remplir
 document.querySelector("tbody").innerHTML = "";
@@ -126,6 +85,14 @@ fetch("https://jsonplaceholder.typicode.com/users").then((response) => {
         return response.json();
     }
 }).then((users) => {
+    if(users.length ==0){
+        const tr = document.createElement("tr");
+        const td = document.createElement("td");
+        td.innerText = "Aucun utilisateur trouvé";
+        td.colSpn = 3;
+        tr.appendChild(td);
+        document.querySelector("tbody").appendChild(tr);
+    }
     // Une fois les données reçues, les afficher dans le tableau en créant une ligne par utilisateur
     users.forEach((user) => {
         // Créer les cellules correspondantes pour le nom, le nom d'utilisateur et l'email

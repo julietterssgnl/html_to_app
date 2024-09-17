@@ -16,7 +16,8 @@
         Another link for css explanation<a href="https://www.w3schools.com/css/" target="_blank">W3Schools CSS</a>.
     </p>
     <p>
-        And a random image <img src="https://picsum.photos/200" alt="Random">
+        And a random image <img id = 'image-to-shake' src="https://picsum.photos/200" alt="Random">
+    <input type ="button"  onclick="shake2('image-to-shake')" value ="Shake / Unshake the image"/>
     </p>
     A list of items:
 
@@ -26,7 +27,7 @@
     </ul>
     A table with some data:
 
-    <table>
+    <table id = 'table-to-shake'>
         <caption>People</caption>
         <thead>
             <tr>
@@ -56,6 +57,7 @@
             </tr>
         </tbody>
     </table>
+    <input type ="button"  onclick="shake2('table-to-shake')" value ="Shake / Unshake the image"/>
 
     <script src="../script.js"></script>
 </body>
